@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title> Spring Boot </title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+</head>
+<body>
+
+<th:block th:fragment="navigation" th:with="page=${page}">
+
+    <div class="col-6">
+        <a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+        <a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+        <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+        <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+        <a href="/ruleName/list">Rule</a>
+    </div>
+    <th:block th:replace="~{layout/logout :: logout}"/>
+
+</th:block>
+</body>
+</html>
