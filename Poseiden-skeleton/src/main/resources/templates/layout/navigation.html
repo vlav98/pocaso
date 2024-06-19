@@ -10,16 +10,16 @@
 <body>
 
 <th:block th:fragment="navigation" th:with="page=${page}">
-
-    <div class="col-6">
-        <a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-        <a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-        <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
-        <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
-        <a href="/ruleName/list">Rule</a>
-    </div>
-    <th:block th:replace="~{layout/logout :: logout}"/>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="col-6">
+            <a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+            <a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+            <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+            <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+            <a href="/ruleName/list">Rule</a>
+        </div>
+        <th:block th:replace="~{layout/logout :: logout}"/>
+    </nav>
 </th:block>
 </body>
 </html>
