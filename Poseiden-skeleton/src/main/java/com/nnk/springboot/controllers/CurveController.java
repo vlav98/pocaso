@@ -19,7 +19,6 @@ import java.util.List;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
     @Autowired
     private CurvePointService curvePointService;
     @Autowired
