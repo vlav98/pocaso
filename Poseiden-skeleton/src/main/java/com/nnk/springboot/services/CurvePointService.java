@@ -26,9 +26,9 @@ public class CurvePointService {
         return curvePointRepository.save(curvePoint);
     }
 
-    public void update(Integer id, CurvePoint curvePoint) {
-        curvePoint.setId(id);
-        curvePointRepository.save(curvePoint);
+    public void update(Integer id, CurvePoint curvePointToUpdate) {
+        curvePointToUpdate.setId(id);
+        curvePointRepository.save(curvePointToUpdate);
     }
 
     public void deleteById(Integer id) {

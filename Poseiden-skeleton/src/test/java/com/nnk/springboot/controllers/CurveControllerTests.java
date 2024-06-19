@@ -54,6 +54,7 @@ public class CurveControllerTests {
                 .andExpect(view().name("curvePoint/add"));
     }
 
+    // TODO : Tests validate form
 //    @Test
 //    @WithMockUser(username = "admin", roles = {"ADMIN"})
 //    public void validateFormTest() throws Exception {
@@ -88,6 +89,7 @@ public class CurveControllerTests {
     }
 
 
+    // TODO : Tests update form
 //    @Test
 //    @WithMockUser(username = "admin", roles = {"ADMIN"})
 //    public void updateBidWithValidInputTest() throws Exception {
@@ -100,7 +102,7 @@ public class CurveControllerTests {
 //                .andExpect(view().name("curvePoint/update"));
 //    }
 
-
+    // TODO : Tests update form with errors
 //    @Test
 //    @WithMockUser(username = "admin", roles = {"ADMIN"})
 //    public void updateBidWithErrorsTest() throws Exception {
