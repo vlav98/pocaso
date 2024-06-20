@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <title>Spring Boot</title>
     <link rel="stylesheet" href="/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
-   <h3>Access Denied Exception</h3>
+<h3>Access Denied Exception</h3>
 
-   <th:block th:replace="~{fragments/logout :: logout}"/>
+<th:block th:replace="~{fragments/logout :: logout}"/>
 
-    <p class="error" th:text="${errorMsg}">Error</p>
+<p class="error" th:text="${errorMsg}">Error</p>
 </body>
 </html>   
