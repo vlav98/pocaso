@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en">
+<head>
+    <title> Spring Boot </title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <title layout:title-pattern="LAYOUT_TITLE"></title>
+</head>
+<body>
+<th:block th:replace="~{fragments/navigation :: navigation}"/>
+<div class="container align-items-center p-5">
+    <th:block th:class="mx-auto" layout:fragment="content"/>
+</div>
+</body>
+</html>

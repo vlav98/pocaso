@@ -1,13 +1,21 @@
-# spring-boot
-## Technical:
+# Poseidon Capital Solutions
 
-1. Spring Boot 3.1.0
+## Summary
+
+Poseidon Capital Solutions is a Spring Boot application developed for managing and monitoring financial operations in the finance market.
+This application let users managing bid lists, curve points, rules and trading information.
+
+
+## Technical Aspect : Spring-boot
+### Configuration:
+
+1. Spring Boot 3.3.0
 2. Java 17
 3. Thymeleaf
 4. Bootstrap v.4.3.1
 
 
-## Setup with Intellij IDE
+### Setup with Intellij IDE
 1. Create project from Initializr: File > New > project > Spring Initializr
 2. Add lib repository into pom.xml
 3. Add folders
@@ -17,11 +25,30 @@
 4. Create database with name "demo" as configuration in application.properties
 5. Run sql script to create table doc/data.sql
 
-## Implement a Feature
+### Implement a Feature
 1. Create mapping domain class and place in package com.nnk.springboot.domain
 2. Create repository class and place in package com.nnk.springboot.repositories
 3. Create controller class and place in package com.nnk.springboot.controllers
 
-## Security
+### Security
 1. Create user service to load user from  database and place in package com.nnk.springboot.services
 2. Add configuration class and place in package com.nnk.springboot.config
+
+## Execution
+Launch the app :
+```shell
+mvn spring-boot:run
+```
+
+The default address is [http://localhost:8080](http://localhost:8080)
+
+## Uses :
+### Connection :
+
+- **User 1** : `user`
+- **Password** : `UPassword1#`
+####
+- **Admin** : `admin`
+- **Password** : `APassword1#`
+
+## Functionalities :

@@ -1,6 +1,9 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,15 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.nio.file.AccessDeniedException;
 
 
 @Controller
 public class BidListController {
     // TODO: Inject Bid service
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
+    public String home(Model model) throws AccessDeniedException {
+        User connectedUser = userService.getAuthenticatedUser();
+        model.addAttribute("connectedUser", connectedUser);
         // TODO: call service find all bids to show to the view
         return "bidList/list";
     }
