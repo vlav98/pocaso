@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,8 +29,6 @@ public class CurveControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -55,25 +54,25 @@ public class CurveControllerTests {
     }
 
     // TODO : Tests validate form
-//    @Test
-//    @WithMockUser(username = "admin", roles = {"ADMIN"})
-//    public void validateFormTest() throws Exception {
-//        CurvePoint validCurvePoint = new CurvePoint();
-//        validCurvePoint.setCurveId(1);
-//        validCurvePoint.setTerm(10.0);
-//        validCurvePoint.setValue(10.0);
-//
-//        when(mockCurvePointService.save(any(CurvePoint.class))).thenReturn(validCurvePoint);
-//
-//        mockMvc.perform(post("/curvePoint/validate")
-//                        .param("curveId", "1")
-//                        .param("term", "10.0")
-//                        .param("value", "10.0"))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/curvePoint/list"));
-//
-//        verify(mockCurvePointService).save(any(CurvePoint.class));
-//    }
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void validateFormTest() throws Exception {
+        CurvePoint validCurvePoint = new CurvePoint();
+        validCurvePoint.setCurveId(1);
+        validCurvePoint.setTerm(10.0);
+        validCurvePoint.setValue(10.0);
+
+        when(mockCurvePointService.save(any(CurvePoint.class))).thenReturn(validCurvePoint);
+
+        mockMvc.perform(post("/curvePoint/validate").with(csrf())
+                        .param("curveId", "1")
+                        .param("term", "10.0")
+                        .param("value", "10.0"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/curvePoint/list"));
+
+        verify(mockCurvePointService).save(any(CurvePoint.class));
+    }
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
@@ -129,7 +128,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void deleteBidWithInvalidIdTest() throws Exception {
+    public void deleteBidWithInvalidIdTest() {
         when(mockCurvePointService.findById(anyInt())).thenReturn(null);
 
         doThrow(new IllegalArgumentException()).when(mockCurvePointService).deleteById(null);

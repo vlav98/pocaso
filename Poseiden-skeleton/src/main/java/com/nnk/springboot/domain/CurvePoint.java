@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "curvePoint")
 public class CurvePoint {
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
     @Id
@@ -17,6 +17,7 @@ public class CurvePoint {
     private Integer id;
     private Integer curveId;
     private Timestamp asOfDate;
+    @NotNull
     private Double term;
     private Double value;
     private Timestamp creationDate;

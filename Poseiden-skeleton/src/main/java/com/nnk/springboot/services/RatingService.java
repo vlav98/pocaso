@@ -1,12 +1,12 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.exceptions.NotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -19,8 +19,7 @@ public class RatingService {
     }
 
     public Rating findById(Integer id) {
-        Optional<Rating> optionalRating = ratingRepository.findById(id);
-        return optionalRating.orElse(null);
+        return ratingRepository.findById(id).orElseThrow(() -> new NotFoundException("Rating with id " + id + " not found"));
     }
 
     public Rating save(Rating rating) {
