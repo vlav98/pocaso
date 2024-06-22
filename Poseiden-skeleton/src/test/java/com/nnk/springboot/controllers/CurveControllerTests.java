@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletRequest;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.runner.RunWith;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,6 +23,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
@@ -28,10 +33,6 @@ import org.springframework.web.context.WebApplicationContext;
 public class CurveControllerTests {
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private CurvePointService mockCurvePointService;
 
@@ -87,31 +88,34 @@ public class CurveControllerTests {
                 .andExpect(view().name("curvePoint/update"));
     }
 
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void updateFormDisplayWithInvalidIdTest() throws Exception {
+        when(mockCurvePointService.findById(anyInt())).thenReturn(null);
 
-    // TODO : Tests update form
-//    @Test
-//    @WithMockUser(username = "admin", roles = {"ADMIN"})
-//    public void updateBidWithValidInputTest() throws Exception {
-//        int validId = 1;
-//        CurvePoint validCurvePoint = new CurvePoint();
-//
-//        mockMvc.perform(post("/curvePoint/update/" + validId))
-//                .andExpect(status().isOk())
-//                .andExpect(model().attributeExists("curvePoint"))
-//                .andExpect(view().name("curvePoint/update"));
-//    }
+        assertThrows(Exception.class, () ->
+                mockMvc.perform(get("/curvePoint/update/1")));
+    }
 
-    // TODO : Tests update form with errors
-//    @Test
-//    @WithMockUser(username = "admin", roles = {"ADMIN"})
-//    public void updateBidWithErrorsTest() throws Exception {
-//        mockMvc.perform(post("/curvePoint/update/1")
-//                        .param("curveId", "")
-//                        .param("term", "")
-//                        .param("value", ""))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("curvePoint/update"));
-//    }
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void updateBidWithValidInputTest() throws Exception {
+        int validId = 1;
+
+        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/curvePoint/list"));
+    }
+
+    @Test
+    public void updateBidWithValidInput_WithGuest_Test() throws Exception {
+        int validId = 1;
+        String domain = "http://localhost";
+
+        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl(domain + "/login"));
+    }
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
