@@ -31,7 +31,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void homeTest() throws Exception {
+    public void curveListDisplayTest() throws Exception {
         mockMvc.perform(get("/curvePoint/list"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("curvePoints"))
@@ -83,7 +83,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void updateFormDisplayWithInvalidIdTest() throws Exception {
+    public void updateFormDisplayWithInvalidIdTest() {
         when(mockCurvePointService.findById(anyInt())).thenReturn(null);
 
         assertThrows(Exception.class, () ->
