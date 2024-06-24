@@ -4,13 +4,13 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.RatingService;
 import com.nnk.springboot.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 

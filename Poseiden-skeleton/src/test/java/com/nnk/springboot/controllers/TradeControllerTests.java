@@ -2,9 +2,8 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeService;
-import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
@@ -15,13 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TradeControllerTests {
@@ -102,7 +99,7 @@ public class TradeControllerTests {
         int validId = 1;
         String domain = "http://localhost";
 
-        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+        mockMvc.perform(post("/trade/update/" + validId).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl(domain + "/login"));
     }

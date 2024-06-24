@@ -2,9 +2,8 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;
-import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -20,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CurveControllerTests {

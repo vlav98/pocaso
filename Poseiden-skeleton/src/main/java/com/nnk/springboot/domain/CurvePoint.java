@@ -3,11 +3,10 @@ package com.nnk.springboot.domain;
 //import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Getter
@@ -15,7 +14,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "curvePoint")
 public class CurvePoint {
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull

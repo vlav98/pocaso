@@ -1,13 +1,11 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import jakarta.validation.constraints.Digits;
 import java.sql.Timestamp;
 
 
@@ -16,7 +14,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "bidlist")
 public class BidList {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
