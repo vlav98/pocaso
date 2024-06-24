@@ -31,7 +31,7 @@ public class RatingService {
         ratingRepository.save(ratingToUpdate);
     }
 
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         ratingRepository.deleteById(id);
     }
 }

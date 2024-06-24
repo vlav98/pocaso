@@ -75,7 +75,7 @@ public class RatingController {
         if (ratingToUpdate == null) {
             throw new IllegalArgumentException("Invalid rating id " + id);
         }
-        ratingService.delete(id);
+        ratingService.deleteById(id);
         return "redirect:/rating/list";
     }
 }

@@ -1,7 +1,5 @@
 package com.nnk.springboot.controllers;
 
-
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
 import org.junit.Test;
@@ -119,7 +117,7 @@ public class RatingControllerTests {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/rating/list"));
 
-        verify(mockRatingService).delete(anyInt());
+        verify(mockRatingService).deleteById(anyInt());
     }
 
     @Test
