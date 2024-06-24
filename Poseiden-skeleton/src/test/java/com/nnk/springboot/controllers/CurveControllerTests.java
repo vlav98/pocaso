@@ -47,7 +47,6 @@ public class CurveControllerTests {
                 .andExpect(view().name("curvePoint/add"));
     }
 
-    // TODO : Tests validate form
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void validateFormTest() throws Exception {
@@ -92,7 +91,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void updateBidWithValidInputTest() throws Exception {
+    public void updateCurvePointWithValidInputTest() throws Exception {
         int validId = 1;
 
         mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
@@ -101,7 +100,7 @@ public class CurveControllerTests {
     }
 
     @Test
-    public void updateBidWithValidInput_WithGuest_Test() throws Exception {
+    public void updateCurvePointWithValidInput_WithGuest_Test() throws Exception {
         int validId = 1;
         String domain = "http://localhost";
 
@@ -112,7 +111,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void deleteBidTest() throws Exception {
+    public void deleteCurvePointTest() throws Exception {
         CurvePoint curvePoint = new CurvePoint();
         when(mockCurvePointService.findById(anyInt())).thenReturn(curvePoint);
 
@@ -125,7 +124,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void deleteBidWithInvalidIdTest() {
+    public void deleteCurvePointWithInvalidIdTest() {
         when(mockCurvePointService.findById(anyInt())).thenReturn(null);
 
         doThrow(new IllegalArgumentException()).when(mockCurvePointService).deleteById(null);
