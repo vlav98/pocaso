@@ -19,7 +19,6 @@ import java.util.List;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
     @Autowired
     private RatingService ratingService;
     @Autowired
@@ -29,7 +28,6 @@ public class RatingController {
     public String home(Model model) throws AccessDeniedException {
         User connectedUser = userService.getAuthenticatedUser();
         model.addAttribute("connectedUser", connectedUser);
-
         List<Rating> ratings = ratingService.findAll();
         model.addAttribute("ratings", ratings);
 
