@@ -5,6 +5,7 @@ import com.nnk.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.nio.file.AccessDeniedException;
@@ -15,10 +16,14 @@ public class HomeController
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("/")
-	public String home(Model model) throws AccessDeniedException {
+	@ModelAttribute
+	public void addAttributes(Model model) throws AccessDeniedException {
 		User connectedUser = userService.getAuthenticatedUser();
 		model.addAttribute("connectedUser", connectedUser);
+	}
+
+	@RequestMapping("/")
+	public String home(Model model) throws AccessDeniedException {
 		return "home";
 	}
 

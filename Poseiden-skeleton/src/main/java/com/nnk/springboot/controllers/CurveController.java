@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.nio.file.AccessDeniedException;
@@ -24,12 +21,15 @@ public class CurveController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute
+    public void addAttributes(Model model) throws AccessDeniedException {
+        User connectedUser = userService.getAuthenticatedUser();
+        model.addAttribute("connectedUser", connectedUser);
+    }
+
     @RequestMapping("/curvePoint/list")
     public String home(Model model) throws AccessDeniedException {
-        // TODO: find all Curve Point, add to model
-        User connectedUser = userService.getAuthenticatedUser();
         List<CurvePoint> curvePointList = curvePointService.findAll();
-        model.addAttribute("connectedUser", connectedUser);
         model.addAttribute("curvePoints", curvePointList);
         return "curvePoint/list";
     }
