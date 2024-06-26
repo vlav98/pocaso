@@ -31,6 +31,7 @@ public class CurvePointService {
     }
 
     public void deleteById(Integer id) {
+        curvePointRepository.findById(id).orElseThrow(() -> new NotFoundException("Curve Point with id " + id + " not found"));
         curvePointRepository.deleteById(id);
     }
 }

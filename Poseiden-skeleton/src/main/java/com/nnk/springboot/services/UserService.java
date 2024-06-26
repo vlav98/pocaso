@@ -1,6 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.NotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,8 +39,7 @@ public class UserService {
     }
 
     public User findById(Integer id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        return optionalUser.orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id " + id + " not found"));
     }
 
     public User save(User user) {
@@ -47,6 +47,8 @@ public class UserService {
     }
 
     public void delete(User user) {
+        userRepository.findById(user.getId()).orElseThrow(() ->
+                new NotFoundException("User with id " + user.getId() + " not found"));
         userRepository.delete(user);
     }
 }

@@ -32,6 +32,7 @@ public class RatingService {
     }
 
     public void deleteById(Integer id) {
+        ratingRepository.findById(id).orElseThrow(() -> new NotFoundException("Rating with id " + id + " not found"));
         ratingRepository.deleteById(id);
     }
 }
