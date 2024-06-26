@@ -77,11 +77,7 @@ public class UserController {
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        User userToUpdate = userService.findById(id);
-        if (userToUpdate == null) {
-            throw new IllegalArgumentException("Invalid user Id:" + id);
-        }
-        userService.delete(userToUpdate);
+        userService.delete(id);
         model.addAttribute("users", userService.findAll());
         return "redirect:/user/list";
     }

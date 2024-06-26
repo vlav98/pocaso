@@ -74,10 +74,6 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        RuleName ruleNameToUpdate = ruleService.findById(id);
-        if (ruleNameToUpdate == null) {
-            throw new IllegalArgumentException("Invalid ruleName id " + id);
-        }
         ruleService.deleteById(id);
         return "redirect:/ruleName/list";
     }

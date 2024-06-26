@@ -70,10 +70,6 @@ public class CurveController {
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        CurvePoint curvePointToUpdate = curvePointService.findById(id);
-        if (curvePointToUpdate == null) {
-            throw new IllegalArgumentException("Invalid curvePoint id" + id);
-        }
         curvePointService.deleteById(id);
         return "redirect:/curvePoint/list";
     }

@@ -46,9 +46,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void delete(User user) {
-        userRepository.findById(user.getId()).orElseThrow(() ->
-                new NotFoundException("User with id " + user.getId() + " not found"));
-        userRepository.delete(user);
+    public void delete(Integer id) {
+        userRepository.findById(id).orElseThrow(() ->
+                new NotFoundException("User with id " + id + " not found"));
+        userRepository.deleteById(id);
     }
 }
