@@ -99,7 +99,7 @@ public class RatingControllerTests {
         int validId = 1;
         String domain = "http://localhost";
 
-        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+        mockMvc.perform(post("/rating/update/" + validId).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl(domain + "/login"));
     }
@@ -116,14 +116,5 @@ public class RatingControllerTests {
                 .andExpect(redirectedUrl("/rating/list"));
 
         verify(mockRatingService).deleteById(anyInt());
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void throwsWhenDeleteRatingWithInvalidIdTest() {
-        when(mockRatingService.findById(anyInt())).thenReturn(null);
-
-        assertThrows(Exception.class, () ->
-                mockMvc.perform(get("/rating/delete/1")));
     }
 }

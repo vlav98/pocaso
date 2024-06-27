@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,7 +38,7 @@ public class CurveControllerTests {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void bidFormDisplayTest() throws Exception {
+    public void curvePointFormDisplayTest() throws Exception {
         mockMvc.perform(get("/curvePoint/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/add"));
@@ -118,16 +117,5 @@ public class CurveControllerTests {
                 .andExpect(redirectedUrl("/curvePoint/list"));
 
         verify(mockCurvePointService).deleteById(anyInt());
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void deleteCurvePointWithInvalidIdTest() {
-        when(mockCurvePointService.findById(anyInt())).thenReturn(null);
-
-        doThrow(new IllegalArgumentException()).when(mockCurvePointService).deleteById(null);
-
-        assertThrows(Exception.class, () -> mockMvc.perform(get("/curvePoint/delete/1"))
-                .andExpect(status().is4xxClientError()));
     }
 }

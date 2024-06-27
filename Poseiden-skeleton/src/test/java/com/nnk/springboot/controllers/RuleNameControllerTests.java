@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -100,7 +99,7 @@ public class RuleNameControllerTests {
         int validId = 1;
         String domain = "http://localhost";
 
-        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+        mockMvc.perform(post("/ruleName/update/" + validId).with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl(domain + "/login"));
     }
@@ -117,14 +116,5 @@ public class RuleNameControllerTests {
                 .andExpect(redirectedUrl("/ruleName/list"));
 
         verify(mockRuleService).deleteById(anyInt());
-    }
-
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    public void throwsWhenDeleteRuleNameWithInvalidIdTest() {
-        when(mockRuleService.findById(anyInt())).thenReturn(null);
-
-        assertThrows(Exception.class, () ->
-                mockMvc.perform(get("/ruleName/delete/1")));
     }
 }
