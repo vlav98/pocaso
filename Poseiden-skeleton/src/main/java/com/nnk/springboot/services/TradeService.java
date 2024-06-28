@@ -1,6 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.exceptions.NotFoundException;
 import com.nnk.springboot.repositories.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class TradeService {
     }
 
     public void deleteById(Integer id) {
+        tradeRepository.findById(id).orElseThrow(() -> new NotFoundException("Trade with id " + id + " not found"));
         tradeRepository.deleteById(id);
     }
 }

@@ -4,32 +4,31 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.RatingService;
 import com.nnk.springboot.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
     @Autowired
     private RatingService ratingService;
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/rating/list")
-    public String home(Model model) throws AccessDeniedException {
+    @ModelAttribute
+    public void addAttributes(Model model) throws AccessDeniedException {
         User connectedUser = userService.getAuthenticatedUser();
         model.addAttribute("connectedUser", connectedUser);
+    }
 
+    @RequestMapping("/rating/list")
+    public String home(Model model) throws AccessDeniedException {
         List<Rating> ratings = ratingService.findAll();
         model.addAttribute("ratings", ratings);
 
@@ -73,11 +72,7 @@ public class RatingController {
 
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        Rating ratingToUpdate = ratingService.findById(id);
-        if (ratingToUpdate == null) {
-            throw new IllegalArgumentException("Invalid rating id " + id);
-        }
-        ratingService.delete(id);
+        ratingService.deleteById(id);
         return "redirect:/rating/list";
     }
 }
