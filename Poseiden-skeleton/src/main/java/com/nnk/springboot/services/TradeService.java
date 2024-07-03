@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TradeService {
@@ -19,8 +18,7 @@ public class TradeService {
     }
 
     public Trade findById(Integer id) {
-        Optional<Trade> optionalTrade = tradeRepository.findById(id);
-        return optionalTrade.orElse(null);
+        return tradeRepository.findById(id).orElseThrow(() -> new NotFoundException("Trade with id " + id + " not found"));
     }
 
     public Trade save(Trade trade) {
