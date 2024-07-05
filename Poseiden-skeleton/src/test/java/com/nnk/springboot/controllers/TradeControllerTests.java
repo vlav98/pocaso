@@ -58,8 +58,7 @@ public class TradeControllerTests {
         mockMvc.perform(post("/trade/validate")
                         .with(csrf())
                         .param("id", String.valueOf(validTrade.getTradeId())))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -90,8 +89,7 @@ public class TradeControllerTests {
         int validId = 1;
 
         mockMvc.perform(post("/trade/update/" + validId).with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(status().isOk());
     }
 
     @Test

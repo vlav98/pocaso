@@ -138,7 +138,6 @@
 				<configuration>
 					<excludes>
 						<exclude>**/com/nnk/springboot/exceptions/*</exclude>
-						<exclude>**/com/nnk/springboot/services/*</exclude>
 						<exclude>**/com/nnk/springboot/domain/*</exclude>
 					</excludes>
 				</configuration>

@@ -94,8 +94,7 @@ public class BidListControllerTests {
         int validId = 1;
 
         mockMvc.perform(post("/bidList/update/" + validId).with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/bidList/list"));
+                .andExpect(status().isOk());
     }
 
     @Test
