@@ -5,18 +5,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
 @Entity
 @Table(name = "ruleName")
 public class RuleName {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     private Integer id;
+    @NotNull
     private String name;
     private String description;
     private String json;

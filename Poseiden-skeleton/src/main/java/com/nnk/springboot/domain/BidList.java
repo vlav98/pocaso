@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     Integer BidListId;
     @NotNull
     String account;

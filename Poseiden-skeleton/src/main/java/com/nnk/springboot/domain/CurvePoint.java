@@ -1,7 +1,5 @@
 package com.nnk.springboot.domain;
 
-//import org.hibernate.validator.constraints.Length;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,8 +14,8 @@ import java.sql.Timestamp;
 public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     private Integer id;
+    @NotNull
     private Integer curveId;
     private Timestamp asOfDate;
     private Double term;

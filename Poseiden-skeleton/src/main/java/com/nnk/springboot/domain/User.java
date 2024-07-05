@@ -3,7 +3,6 @@ package com.nnk.springboot.domain;
 import com.nnk.springboot.validators.Password;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,6 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @NotNull
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
