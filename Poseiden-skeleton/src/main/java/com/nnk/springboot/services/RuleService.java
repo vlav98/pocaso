@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RuleService {
@@ -19,8 +18,7 @@ public class RuleService {
     }
 
     public RuleName findById(Integer id) {
-        Optional<RuleName> optionalRuleName =  ruleNameRepository.findById(id);
-        return optionalRuleName.orElse(null);
+        return ruleNameRepository.findById(id).orElseThrow(() -> new NotFoundException("Rule with id " + id + " not found"));
     }
 
     public RuleName save(RuleName ruleName) {
