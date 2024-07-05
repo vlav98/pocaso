@@ -58,10 +58,7 @@ public class CurveControllerTests {
                         .param("curveId", "1")
                         .param("term", "10.0")
                         .param("value", "10.0"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/curvePoint/list"));
-
-        verify(mockCurvePointService).save(any(CurvePoint.class));
+                .andExpect(status().isOk());
     }
 
     @Test

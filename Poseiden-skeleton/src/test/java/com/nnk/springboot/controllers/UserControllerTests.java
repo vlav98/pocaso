@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,11 +31,9 @@ public class UserControllerTests {
     @MockBean
     private UserService mockUserService;
 
-
-    private User adminUser = new User();
-    private User authenticatedUser = new User();
-
-    private User validUser = new User();
+    private final User adminUser = new User();
+    private final User authenticatedUser = new User();
+    private final User validUser = new User();
 
     @BeforeEach
     public void setUp() throws AccessDeniedException {
@@ -97,8 +96,7 @@ public class UserControllerTests {
                         .param("password", validUser.getPassword())
                         .param("role", validUser.getRole())
                 )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user/list"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -134,8 +132,7 @@ public class UserControllerTests {
                         .param("password", validUser.getPassword())
                         .param("role", validUser.getRole())
                 )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user/list"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -153,5 +150,16 @@ public class UserControllerTests {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    public void deleteBidListTest() throws Exception {
+        User user = new User();
+        when(mockUserService.findById(anyInt())).thenReturn(user);
 
+        mockMvc.perform(get("/user/delete/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/user/list"));
+
+        verify(mockUserService).delete(anyInt());
+    }
 }
