@@ -88,8 +88,14 @@ public class CurveControllerTests {
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void updateCurvePointWithValidInputTest() throws Exception {
         int validId = 1;
+        int curveId = 1;
+        double term = 1.0;
+        double value = 2.0;
 
-        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf()))
+        mockMvc.perform(post("/curvePoint/update/" + validId).with(csrf())
+                        .param("curveId", String.valueOf(curveId))
+                        .param("term", String.valueOf(term))
+                        .param("value", String.valueOf(value)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/curvePoint/list"));
     }

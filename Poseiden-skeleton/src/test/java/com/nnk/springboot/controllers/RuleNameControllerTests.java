@@ -51,12 +51,14 @@ public class RuleNameControllerTests {
     public void validateFormTest() throws Exception {
         RuleName validRuleName = new RuleName();
         validRuleName.setId(1);
+        validRuleName.setName("Test name");
 
         when(mockRuleService.save(any(RuleName.class))).thenReturn(validRuleName);
 
         mockMvc.perform(post("/ruleName/validate")
                         .with(csrf())
-                        .param("id", String.valueOf(validRuleName.getId())))
+                        .param("id", String.valueOf(validRuleName.getId()))
+                        .param("name", validRuleName.getName()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/ruleName/list"));
     }
@@ -87,8 +89,13 @@ public class RuleNameControllerTests {
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void updateRuleNameWithValidInputTest() throws Exception {
         int validId = 1;
+        RuleName validRuleName = new RuleName();
+        validRuleName.setId(validId);
+        validRuleName.setName("Test name");
 
-        mockMvc.perform(post("/ruleName/update/" + validId).with(csrf()))
+        mockMvc.perform(post("/ruleName/update/" + validId)
+                        .with(csrf())
+                        .param("name", validRuleName.getName()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/ruleName/list"));
     }
