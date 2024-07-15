@@ -23,15 +23,18 @@ public class HomeController
 	}
 
 	@RequestMapping("/")
-	public String home(Model model) throws AccessDeniedException {
+	public String home() throws AccessDeniedException {
 		return "home";
 	}
 
 	@RequestMapping("/admin/home")
-	public String adminHome(Model model)
+	public String adminHome()
 	{
 		return "redirect:/bidList/list";
 	}
 
-
+	@RequestMapping("/403")
+	public String error() {
+		return "403";
+	}
 }

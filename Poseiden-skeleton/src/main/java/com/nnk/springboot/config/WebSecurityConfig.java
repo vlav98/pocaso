@@ -100,6 +100,7 @@ public class WebSecurityConfig {
                         .logoutUrl("/app-logout")
                         .logoutSuccessUrl("/login")
                 )
+                .exceptionHandling((exception -> exception.accessDeniedPage("/403")))
                 .authenticationManager(authenticationManager)
                 .build();
     }
