@@ -16,7 +16,7 @@
             <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
             <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
             <a href="/ruleName/list">Rule</a>
-            <span sec:authorize="hasRole('ROLE_ADMIN')"> | <a href="user/list">Users</a></span>
+            <span sec:authorize="hasRole('ROLE_ADMIN')"> | <a href="/user/list">Users</a></span>
         </div>
         <th:block th:replace="~{fragments/logout :: logout}"/>
     </nav>
