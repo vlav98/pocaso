@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       lang="en">
 <head>
     <title> Spring Boot </title>
@@ -16,6 +16,7 @@
             <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
             <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
             <a href="/ruleName/list">Rule</a>
+            <span sec:authorize="hasRole('ROLE_ADMIN')"> | <a href="user/list">Users</a></span>
         </div>
         <th:block th:replace="~{fragments/logout :: logout}"/>
     </nav>

@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotNull
+    @NotBlank(message = "Name is mandatory")
     private String name;
     private String description;
     private String json;
